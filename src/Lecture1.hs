@@ -117,10 +117,8 @@ The string contains only spaces and/or numbers.
 -}
 
 strSum :: String -> Integer
-strSum str = 
-    words str 
-    & map read 
-    & sum
+strSum = sum . map read . words
+    
 
 {- | Write a function that takes a number and a list of numbers and
 returns a string, saying how many elements of the list are strictly
