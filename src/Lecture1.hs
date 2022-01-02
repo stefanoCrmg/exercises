@@ -135,10 +135,16 @@ and lower than 6 elements (4, 5, 6, 7, 8 and 9).
 -}
 
 recLowGrt :: Int -> [Int] -> (Int, Int)
-recLowGrt n = foldl compareNums (0, 0)
-      where compareNums (lt, gt) x | n > x = (lt, gt + 1)
-            compareNums (lt, gt) x | n < x = (lt + 1, gt)
-            compareNums (lt, gt) _  = (lt, gt)
+recLowGrt n (x:xs)
+    | x > n  = recLowGrt n xs & (\(a, b) -> (a + 1, b))
+    | x < n  = recLowGrt n xs & (\(a, b) -> (a, b + 1))
+    | otherwise = recLowGrt n xs & (\(a, b) -> (a, b))
+recLowGrt _ _ = (0, 0)
+
+-- recLowGrt n = foldl compareNums (0, 0)
+--       where compareNums (lt, gt) x | n > x = (lt, gt + 1)
+--             compareNums (lt, gt) x | n < x = (lt + 1, gt)
+--             compareNums (lt, gt) _  = (lt, gt)
 
 lowerAndGreater :: Int -> [Int] -> String
 lowerAndGreater n xs = 
