@@ -28,7 +28,7 @@ module Lecture1
     , minmax
     , subString
     , strSum
-    -- , lowerAndGreater
+    , lowerAndGreater
     ) where
 import Data.Function
 
@@ -55,8 +55,8 @@ is 25.
 
 -- DON'T FORGET TO SPECIFY THE TYPE IN HERE
 sumOfSquares :: Int -> Int -> Int
-sumOfSquares x y = 
-    map (^2) [x, y] 
+sumOfSquares x y =
+    map (^2) [x, y]
     & sum
 
 {- | Implement a function that returns the last digit of a given number.
@@ -118,7 +118,7 @@ The string contains only spaces and/or numbers.
 
 strSum :: String -> Integer
 strSum = sum . map read . words
-    
+
 
 {- | Write a function that takes a number and a list of numbers and
 returns a string, saying how many elements of the list are strictly
@@ -133,3 +133,18 @@ and lower than 6 elements (4, 5, 6, 7, 8 and 9).
 
 🕯 HINT: Use recursion to implement this function.
 -}
+
+recLowGrt :: Int -> [Int] -> (Int, Int)
+recLowGrt n = foldl compareNums (0, 0)
+      where compareNums (lt, gt) x | n > x = (lt, gt + 1)
+            compareNums (lt, gt) x | n < x = (lt + 1, gt)
+            compareNums (lt, gt) _  = (lt, gt)
+
+lowerAndGreater :: Int -> [Int] -> String
+lowerAndGreater n xs = 
+    recLowGrt n xs & 
+    (\(x, y) -> show n ++ " is greater than " ++ show y ++ " elements and lower than " ++ show x ++ " elements")
+
+
+
+
