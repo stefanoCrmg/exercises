@@ -136,9 +136,10 @@ and lower than 6 elements (4, 5, 6, 7, 8 and 9).
 
 recLowGrt :: Int -> [Int] -> (Int, Int)
 recLowGrt n (x:xs)
-    | x > n  = recLowGrt n xs & (\(a, b) -> (a + 1, b))
-    | x < n  = recLowGrt n xs & (\(a, b) -> (a, b + 1))
-    | otherwise = recLowGrt n xs & (\(a, b) -> (a, b))
+    | x > n  =  (gt, lt + 1)
+    | x < n  = (gt +1, lt)
+    | otherwise = (gt, lt)
+    where (gt, lt) = recLowGrt n xs
 recLowGrt _ _ = (0, 0)
 
 -- recLowGrt n = foldl compareNums (0, 0)
