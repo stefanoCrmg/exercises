@@ -149,8 +149,8 @@ recLowGrt _ _ = (0, 0)
 
 lowerAndGreater :: Int -> [Int] -> String
 lowerAndGreater n xs = 
-    recLowGrt n xs & 
-    (\(x, y) -> show n ++ " is greater than " ++ show y ++ " elements and lower than " ++ show x ++ " elements")
+    show n ++ " is greater than " ++ show gt ++ " elements and lower than " ++ show lt ++ " elements"
+    where (gt, lt) = recLowGrt n xs
 
 
 
